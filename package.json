@@ -1,0 +1,40 @@
+{
+  "name": "local-state",
+  "version": "1.0.0",
+  "main": "dist/local-state.js",
+  "module": "src/index.js",
+  "types": "dist/types.d.ts",
+  "author": "Suren Atoyan <contact@surenatoyan.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test-watch": "npm run build && jest --watch",
+    "coverage": "jest --collect-coverage",
+    "lint": "npx eslint src",
+    "prepublish": "npm test && npm run lint && npm run build",
+    "build": "npx webpack --mode=production && cp ./src/types.d.ts ./dist/"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && npm run lint"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^26.2.2",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.6.0",
+    "husky": "^4.2.5",
+    "jest": "^26.2.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {}
+}
