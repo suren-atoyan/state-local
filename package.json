@@ -1,12 +1,25 @@
 {
   "name": "local-state",
   "version": "1.0.0",
+  "description": "Tiny, simple, and robust technique for defining and acting with local states",
   "main": "dist/local-state.js",
   "module": "src/index.js",
   "types": "dist/types.d.ts",
   "author": "Suren Atoyan <contact@surenatoyan.com>",
   "license": "MIT",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suren-atoyan/local-state"
+  },
+  "bugs": {
+    "url": "https://github.com/suren-atoyan/local-state/issues"
+  },
+  "homepage": "https://github.com/suren-atoyan/local-state#readme",
+  "keywords": [
+    "state",
+    "state management",
+    "local state"
+  ],
   "scripts": {
     "test": "jest",
     "test-watch": "npm run build && jest --watch",
