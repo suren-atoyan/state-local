@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["spec.js", "*.spec.js"],
+  "extends": "eslint:recommended",
+  "rules": {
+  }
+}
