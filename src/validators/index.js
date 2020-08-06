@@ -35,7 +35,7 @@ const errorMessages = {
   selectorType: 'selector should be a function',
   changeType: 'provided value of changes should be an object',
   changeField: 'it seams you want to change a field in the state which is not specified in the "initial" state',
-  default: 'an unknown error accured in `local-state` package',
+  default: 'an unknown error accured in `state-local` package',
 };
 
 const errorHandler = curry(throwError)(errorMessages);

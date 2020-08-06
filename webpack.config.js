@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'local-state.js',
+    filename: 'state-local.js',
     library: 'state',
     libraryTarget: 'umd',
     globalObject: 'this',

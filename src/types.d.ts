@@ -1,5 +1,5 @@
-// Type definitions for local-state v0.0.1
-// Project: local-state
+// Type definitions for state-local v0.0.1
+// Project: state-local
 // Definitions by: Suren Atoyan contact@surenatoyan.com
 
 export as namespace state;

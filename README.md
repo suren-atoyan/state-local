@@ -1,4 +1,4 @@
-# State &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/local-state/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/local-state.svg?style=flat)](https://www.npmjs.com/package/local-state)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]([https://github.com/suren-atoyan/monaco-react/pulls](https://github.com/suren-atoyan/local-state/pulls))
+# State &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/state-local/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/state-local.svg?style=flat)](https://www.npmjs.com/package/state-local)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]([https://github.com/suren-atoyan/monaco-react/pulls](https://github.com/suren-atoyan/state-local/pulls))
 
 :zap: Tiny, simple, and robust technique for defining and acting with local states (in node and in browser)
 
@@ -45,7 +45,7 @@ The example above lacks control over the mutations and consumption, which can le
 :white_check_mark:
 
 ```javascript
-import state from 'local-state';
+import state from 'state-local';
 
 const [getState, setState] = state.create({ x: 0, y: 1 });
 
@@ -73,7 +73,7 @@ function yetAnotherFn() {
 We also can track the changes in items:
 
 ```javascript
-import state from 'local-state';
+import state from 'state-local';
 
 const [getState, setState] = state.create({ x: 0, y: 1 }, {
   x: latestX => console.log('(⌐▀ ̯ʖ▀) Houston we have a problem; "x" has been changed. "x" now is:', latestX),
@@ -86,7 +86,7 @@ const [getState, setState] = state.create({ x: 0, y: 1 }, {
 We can use the subset of the state in some execution contexts:
 
 ```javascript
-import state from 'local-state';
+import state from 'state-local';
 
 const [getState, setState] = state.create({ x: 5, y: 7 });
 
@@ -119,17 +119,17 @@ And much more...
 You can install this library as an npm package or download it from the CDN and use it in node or browser:
 
 ```bash
-npm install local-state
+npm install state-local
 ```
 or
 ```bash
-yarn add local-state
+yarn add state-local
 ```
 
 or
 
 ```html
-<script src="https://unpkg.com/local-state/dist/local-state.js"></script>
+<script src="https://unpkg.com/state-local/dist/state-local.js"></script>
 
 <script>
 // now it is available in `window` (window.state)
@@ -143,7 +143,7 @@ const [getState, setState] = state.create({ x: 11, y: 13 });
 There is a named export `create` in this library, which is supposed to be a function to create a state:
 
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 // ...
 ```
@@ -158,7 +158,7 @@ import { create as createState } from 'local-state';
 `initial state` is a base structure and a value for the state. It should be a non-empty object
 
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 /*
 const [getState, setState] = createState(); // ❌ error - initial state is required
@@ -181,7 +181,7 @@ see example below:
 
 if `handler` is a function
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 const [getState, setState] = createState({ x: 2, y: 3, z: 5 }, handleStateUpdate /* will be called immediately after every state update */);
 
@@ -195,7 +195,7 @@ setState({ x: 7, y: 11, z: 13 });
 
 if `handler` is an object
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 const [getState, setState] = createState({ x: 2, y: 3, z: 5 }, {
   x: handleXUpdate, // will be called immediately after every "x" update
@@ -220,7 +220,7 @@ setState({ x: 7, y: 11, z: 13 });
 `getState` is the first element of the pair returned by `create` function. It will return the current state or the subset of the current state depending on how it was called. It has an optional parameter `selector`
 
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 const [getState, setState] = state.create({ p1: 509, p2: 521 });
 
@@ -240,7 +240,7 @@ console.log(p2); // 521
 `selector` is a function that is supposed to be passed (optional) as an argument to `getState`. It receives the current state and returns a subset of the state
 
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 const [getState, setState] = state.create({ p1: 389, p2: 397, p3: 401 });
 
@@ -259,7 +259,7 @@ function someFn() {
 **NOTE: the change object can't contain a field that is not specified in the "initial" state**
 
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 const [getState, setState] = state.create({ x:0, y: 0 });
 
@@ -273,7 +273,7 @@ setState({ x: -11, y: 11 }); // ✅ ok
 `setState` also can receive a function which will be called with the current state and it is supposed to return the change object
 
 ```javascript
-import { create as createState } from 'local-state';
+import { create as createState } from 'state-local';
 
 const [getState, setState] = state.create({ x:0, y: 0 });
 
