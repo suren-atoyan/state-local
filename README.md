@@ -70,6 +70,8 @@ function yetAnotherFn() {
 }
 ```
 
+[codesandbox](https://codesandbox.io/s/motivation-1-xv5el?file=/src/index.js)
+
 We also can track the changes in items:
 
 ```javascript
@@ -83,6 +85,8 @@ const [getState, setState] = state.create({ x: 0, y: 1 }, {
 // ...
 ```
 
+[codesandbox](https://codesandbox.io/s/motivation-2-ivf7d)
+
 We can use the subset of the state in some execution contexts:
 
 ```javascript
@@ -95,9 +99,11 @@ function someFn() {
   const state = getState(({ x }) => ({ x }));
 
   console.log(state.x); // 5
-  console.log(state.y); // ❌ undifined - there is no y
+  console.log(state.y); // ❌ undefined - there is no y
 }
 ```
+
+[codesandbox](https://codesandbox.io/s/motivation-3-femne)
 
 And much more...
 
@@ -148,6 +154,8 @@ import { create as createState } from 'state-local';
 // ...
 ```
 
+[codesandbox](https://codesandbox.io/s/docs-create-t1cxe)
+
 `create` is a function with two parameters:
 
 1) [`initial state`](#initial-state) (**required**)
@@ -169,6 +177,8 @@ const [getState, setState] = createState({}); // ❌ error - initial state shoul
 const [getState, setState] = createState({ isLoading: false, payload: null }); // ✅
 // ...
 ```
+
+[codesandbox](https://codesandbox.io/s/docs-initial-state-22i3s)
 
 #### handler
 
@@ -193,6 +203,8 @@ setState({ x: 7, y: 11, z: 13 });
 // ...
 ```
 
+[codesandbox](https://codesandbox.io/s/handler-function-uevxj)
+
 if `handler` is an object
 ```javascript
 import { create as createState } from 'state-local';
@@ -215,25 +227,29 @@ setState({ x: 7, y: 11, z: 13 });
 // ...
 ```
 
+[codesandbox](https://codesandbox.io/s/handler-object-8k0pt)
+
 #### getState
 
 `getState` is the first element of the pair returned by `create` function. It will return the current state or the subset of the current state depending on how it was called. It has an optional parameter `selector`
 
 ```javascript
-import { create as createState } from 'state-local';
+import { create as createState } from "state-local";
 
-const [getState, setState] = state.create({ p1: 509, p2: 521 });
+const [getState, setState] = createState({ p1: 509, p2: 521 });
 
 const state = getState();
-console.log(state.p1); // 501
-consoel.log(state.p2); // 521
+console.log(state.p1); // 509
+console.log(state.p2); // 521
 
 // or
 
 const { p1, p2 } = getState();
-console.log(p1); // 501
+console.log(p1); // 509
 console.log(p2); // 521
 ```
+
+[codesandbox](https://codesandbox.io/s/getstate-zn3hj)
 
 #### selector
 
@@ -242,15 +258,17 @@ console.log(p2); // 521
 ```javascript
 import { create as createState } from 'state-local';
 
-const [getState, setState] = state.create({ p1: 389, p2: 397, p3: 401 });
+const [getState, setState] = createState({ p1: 389, p2: 397, p3: 401 });
 
 function someFn() {
   const state = getState(({ p1, p2 }) => ({ p1, p2 }));
   console.log(state.p1); // 389
-  consoel.log(state.p2); // 397
-  console.log(state.p3); // ❌ undifined - there is no p3
+  console.log(state.p2); // 397
+  console.log(state.p3); // ❌ undefined - there is no p3
 }
 ```
+
+[codesandbox](https://codesandbox.io/s/selector-vjmdu)
 
 #### setState
 
@@ -261,7 +279,7 @@ function someFn() {
 ```javascript
 import { create as createState } from 'state-local';
 
-const [getState, setState] = state.create({ x:0, y: 0 });
+const [getState, setState] = createState({ x:0, y: 0 });
 
 setState({ z: 'some value' }); // ❌ error - it seams you want to change a field in the state which is not specified in the "initial" state
 
@@ -270,18 +288,22 @@ setState({ y: 1 }); // ✅ ok
 setState({ x: -11, y: 11 }); // ✅ ok
 ```
 
+[codesandbox](https://codesandbox.io/s/setstate-1-u4fq0)
+
 `setState` also can receive a function which will be called with the current state and it is supposed to return the change object
 
 ```javascript
 import { create as createState } from 'state-local';
 
-const [getState, setState] = state.create({ x:0, y: 0 });
+const [getState, setState] = createState({ x:0, y: 0 });
 
 setState(state => ({ x: state.x + 2 })); // ✅ ok
-setState(state => ({ x: staet.x - 11, y: state.y + 11 })); // ✅ ok
+setState(state => ({ x: state.x - 11, y: state.y + 11 })); // ✅ ok
 
 setState(state => ({ z: 'some value' })); // ❌ error - it seams you want to change a field in the state which is not specified in the "initial" state
 ```
+
+[codesandbox](https://codesandbox.io/s/smoosh-wildflower-nv9dg)
 
 ## License
 
