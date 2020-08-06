@@ -1,6 +1,6 @@
 {
   "name": "state-local",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tiny, simple, and robust technique for defining and acting with local states",
   "main": "dist/state-local.js",
   "module": "src/index.js",
