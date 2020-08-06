@@ -1,6 +1,6 @@
 # State &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/state-local/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/state-local.svg?style=flat)](https://www.npmjs.com/package/state-local)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]([https://github.com/suren-atoyan/monaco-react/pulls](https://github.com/suren-atoyan/state-local/pulls))
 
-:zap: Tiny, simple, and robust technique for defining and acting with local states (in node and in browser)
+:zap: Tiny, simple, and robust technique for defining and acting with local states (for all js environments - node, browser, etc.)
 
 ## Synopsis
 
