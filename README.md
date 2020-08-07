@@ -58,9 +58,9 @@ function someFn() {
 // ...
 function anotherFn() {
  // ...
- const state = getState();
  setState({ y: 6 });
- console.log(state.x);
+ const state = getState();
+ console.log(state);
 }
 
 // ...
