@@ -3,13 +3,13 @@ import { errorMessages } from './validators';
 
 // there are three major parts that should be tested
 
-// 1) the `createState` function it self
+// 1) the `createState` function itself
 // `createState` is a function with two parameters:
 // the first one (required) is the initial state and it should be a non-empty object
 // the second one (optional) is the handler, which can be function or object
-// if the handler is a function than it should be called immediately after every state update
-// if the handler is an object than the keys of that object should be a subset of the state
-// and the all values of that object should be functions, plus they should be called immediately
+// if the handler is a function then it should be called immediately after every state update
+// if the handler is an object then the keys of that object should be a subset of the state
+// and all the values of that object should be functions, plus they should be called immediately
 // after every update of the corresponding field in the state
 
 describe('createState', () => {
@@ -67,7 +67,7 @@ describe('createState', () => {
   });
 
   // test 6 - check if `createState` (with valid first argument) throws an error when the second
-  // argument is an object but the values of it are not functions
+  // argument is an object but its values are not functions
   test('should throw an error when the second argument is object, but its values are not functions', () => {
     function callCreateStateWithWrongSecondArgument() {
       createState({ x: 1, y: 2 }, {
@@ -84,7 +84,7 @@ describe('createState', () => {
 // `getState` is a function with one optional parameter - selector
 // `getState` call without argument will return the current state
 // `getState` call with an argument (selector) will return the subset of the current state
-// the selector should be a function, which is suppsed to receive the current state and return the subset of it
+// the selector should be a function, which is supposed to receive the current state and return its subset
 
 describe('getState', () => {
   // test 1 - check if `getState` is a function
