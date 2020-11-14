@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.2
+###### *Nov 14, 2020*
+
+- fix `module` path in package.json
+
 ## 1.0.1
 ###### *Aug 6, 2020*
 
