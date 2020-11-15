@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.3
+###### *Nov 15, 2020*
+
+- remove `src` from `.npmignore` and refer it to `package.module`
+
 ## 1.0.2
 ###### *Nov 14, 2020*
 
