@@ -9,7 +9,6 @@ CODE_OF_CONDUCT.md
 .vscode/
 
 /demo/
-/src/
 /coverage/
 /.github/
 /node_modules/
