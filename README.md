@@ -146,10 +146,12 @@ const [getState, setState] = state.create({ x: 11, y: 13 });
 
 #### create
 
-There is a named export `create` in this library, which is supposed to be a function to create a state:
+The default export has a method called `create`, which is supposed to be a function to create a state:
 
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
+
+// state.create
 
 // ...
 ```
@@ -166,15 +168,15 @@ import { create as createState } from 'state-local';
 `initial state` is a base structure and a value for the state. It should be a non-empty object
 
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
 /*
-const [getState, setState] = createState(); // ❌ error - initial state is required
-const [getState, setState] = createState(5); // ❌ error - initial state should be an object
-const [getState, setState] = createState({}); // ❌ error - initial state shouldn\'t be an empty object
+const [getState, setState] = state.create(); // ❌ error - initial state is required
+const [getState, setState] = state.create(5); // ❌ error - initial state should be an object
+const [getState, setState] = state.create({}); // ❌ error - initial state shouldn\'t be an empty object
 */
 
-const [getState, setState] = createState({ isLoading: false, payload: null }); // ✅
+const [getState, setState] = state.create({ isLoading: false, payload: null }); // ✅
 // ...
 ```
 
@@ -191,9 +193,9 @@ see example below:
 
 if `handler` is a function
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
-const [getState, setState] = createState({ x: 2, y: 3, z: 5 }, handleStateUpdate /* will be called immediately after every state update */);
+const [getState, setState] = state.create({ x: 2, y: 3, z: 5 }, handleStateUpdate /* will be called immediately after every state update */);
 
 function handleStateUpdate(latestState) {
   console.log('hey state has been updated; the new state is:', latestState); // { x: 7, y: 11, z: 13 }
@@ -207,9 +209,9 @@ setState({ x: 7, y: 11, z: 13 });
 
 if `handler` is an object
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
-const [getState, setState] = createState({ x: 2, y: 3, z: 5 }, {
+const [getState, setState] = state.create({ x: 2, y: 3, z: 5 }, {
   x: handleXUpdate, // will be called immediately after every "x" update
   y: handleYUpdate, // will be called immediately after every "y" update
   // and we don't want to listen "z" updates 😔
@@ -234,9 +236,9 @@ setState({ x: 7, y: 11, z: 13 });
 `getState` is the first element of the pair returned by `create` function. It will return the current state or the subset of the current state depending on how it was called. It has an optional parameter `selector`
 
 ```javascript
-import { create as createState } from "state-local";
+import state from "state-local";
 
-const [getState, setState] = createState({ p1: 509, p2: 521 });
+const [getState, setState] = state.create({ p1: 509, p2: 521 });
 
 const state = getState();
 console.log(state.p1); // 509
@@ -256,9 +258,9 @@ console.log(p2); // 521
 `selector` is a function that is supposed to be passed (optional) as an argument to `getState`. It receives the current state and returns a subset of the state
 
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
-const [getState, setState] = createState({ p1: 389, p2: 397, p3: 401 });
+const [getState, setState] = state.create({ p1: 389, p2: 397, p3: 401 });
 
 function someFn() {
   const state = getState(({ p1, p2 }) => ({ p1, p2 }));
@@ -277,9 +279,9 @@ function someFn() {
 **NOTE: the change object can't contain a field that is not specified in the "initial" state**
 
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
-const [getState, setState] = createState({ x:0, y: 0 });
+const [getState, setState] = state.create({ x:0, y: 0 });
 
 setState({ z: 'some value' }); // ❌ error - it seams you want to change a field in the state which is not specified in the "initial" state
 
@@ -293,9 +295,9 @@ setState({ x: -11, y: 11 }); // ✅ ok
 `setState` also can receive a function which will be called with the current state and it is supposed to return the change object
 
 ```javascript
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
-const [getState, setState] = createState({ x:0, y: 0 });
+const [getState, setState] = state.create({ x:0, y: 0 });
 
 setState(state => ({ x: state.x + 2 })); // ✅ ok
 setState(state => ({ x: state.x - 11, y: state.y + 11 })); // ✅ ok
