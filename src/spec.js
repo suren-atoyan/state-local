@@ -1,4 +1,4 @@
-import { create as createState } from '.';
+import state from '.';
 import { errorMessages } from './validators';
 
 // there are three major parts that should be tested
@@ -17,7 +17,7 @@ describe('createState', () => {
   // check error message
   test('should throw an error when no arguments are passed', () => {
     function callCreateStateWithoutArguments() {
-      createState();
+      state.create();
     }
 
     expect(callCreateStateWithoutArguments).toThrow(errorMessages.initialIsRequired);
@@ -27,7 +27,7 @@ describe('createState', () => {
   // check the error message
   test('should throw an error when the first argument is not an object', () => {
     function callCreateStateWithNonObjectFirstArgument(initial) {
-      return () => createState(initial);
+      return () => state.create(initial);
     }
 
     expect(callCreateStateWithNonObjectFirstArgument('string')).toThrow(errorMessages.initialType);
@@ -39,7 +39,7 @@ describe('createState', () => {
   // check the error message
   test('should throw an error when the first argument is an empty object', () => {
     function callCreateStateWithEmptyObjectFirstArgument() {
-      createState({});
+      state.create({});
     }
 
     expect(callCreateStateWithEmptyObjectFirstArgument).toThrow(errorMessages.initialContent);
@@ -47,7 +47,7 @@ describe('createState', () => {
 
   // test 4 - check if `createState` returns a pair of functions when it receives a non-empty object
   test('should return a pair of functions when receives a non-empty object', () => {
-    const result = createState({ x: 1, y: 2 });
+    const result = state.create({ x: 1, y: 2 });
 
     expect(result.length).toEqual(2);
     expect(result[0]).toBeInstanceOf(Function);
@@ -59,7 +59,7 @@ describe('createState', () => {
   // check the error message
   test('should throw an error when the second argument is neither function nor object', () => {
     function callCreateStateWithWrongSecondArgument(handler) {
-      return () => createState({ x: 1, y: 2 }, handler);
+      return () => state.create({ x: 1, y: 2 }, handler);
     }
 
     expect(callCreateStateWithWrongSecondArgument('string')).toThrow(errorMessages.handlerType);
@@ -70,7 +70,7 @@ describe('createState', () => {
   // argument is an object but its values are not functions
   test('should throw an error when the second argument is object, but its values are not functions', () => {
     function callCreateStateWithWrongSecondArgument() {
-      createState({ x: 1, y: 2 }, {
+      state.create({ x: 1, y: 2 }, {
         x: () => {},
         y: 'not a function',
       });
@@ -89,7 +89,7 @@ describe('createState', () => {
 describe('getState', () => {
   // test 1 - check if `getState` is a function
   test('should be a function', () => {
-    const [setState, getState] = createState({ isLoading: true, errorMessages: 'something went wrong' });
+    const [setState, getState] = state.create({ isLoading: true, errorMessages: 'something went wrong' });
 
     expect(getState).toBeInstanceOf(Function);
   });
@@ -97,7 +97,7 @@ describe('getState', () => {
   // test 2 - check if `getState` (without arguments) returns the current state
   test('should return the current state when the selector is missing', () => {
     const initialState = { isRendered: false, data: null };
-    const [getState, setState] = createState(initialState);
+    const [getState, setState] = state.create(initialState);
 
     const currentState = getState();
 
@@ -109,7 +109,7 @@ describe('getState', () => {
   // the selector (the first argument) is not a function
   // check the error message
   test('should throw an error when the selector is not a function', () => {
-    const [getState, setState] = createState({ value: 0 });
+    const [getState, setState] = state.create({ value: 0 });
 
     function callGetStateWithNonFunctionSelector(selector) {
       return () => getState(selector);
@@ -126,13 +126,13 @@ describe('getState', () => {
 
   // test 4 - check if `getState` with the selector returns a subset of the current state as expected
   test('should return a subset of the current state if the selector is provided', () => {
-    const [getState, setState] = createState({ x: 0, y: 0, color: '#fff', isActive: false });
+    const [getState, setState] = state.create({ x: 0, y: 0, color: '#fff', isActive: false });
 
-    const state = getState(({ x, y }) => ({ x, y }));
+    const currentState = getState(({ x, y }) => ({ x, y }));
 
-    expect(state).toEqual({ x: 0, y: 0 });
-    expect(state.color).toBeUndefined();
-    expect(state.isActive).toBeUndefined();
+    expect(currentState).toEqual({ x: 0, y: 0 });
+    expect(currentState.color).toBeUndefined();
+    expect(currentState.isActive).toBeUndefined();
   });
 });
 
@@ -148,7 +148,7 @@ describe('getState', () => {
 describe('setState', () => {
   // test 1 - check if `setState` is a function
   test('should be a function', () => {
-    const [getState, setState] = createState({ resolve: null, reject: null });
+    const [getState, setState] = state.create({ resolve: null, reject: null });
 
     expect(setState).toBeInstanceOf(Function);
   });
@@ -156,7 +156,7 @@ describe('setState', () => {
   // test 2 - check if `setState` throws an error when the argument is neither object nor function
   // check the error message
   test('should throw an error when the argument is neither object nor function', () => {
-    const [getState, setState] = createState({ config: {} });
+    const [getState, setState] = state.create({ config: {} });
 
     function callSetStateWithWrongArgument(change) {
       return () => setState(change);
@@ -173,7 +173,7 @@ describe('setState', () => {
   // test 3 - check if `setState` throws an error when the change object contains a key which is not from the initial state
   // check the error message
   test('should throw an error when the change object is not compatible with initial state', () => {
-    const [getState, setState] = createState({ x: 1, y: 2 });
+    const [getState, setState] = state.create({ x: 1, y: 2 });
 
     function callSetStateWithWrongChangeObject(change) {
       return () => setState(change);
@@ -185,7 +185,7 @@ describe('setState', () => {
 
   // test 5 - check if `setState` call updates the current state as expected
   test('should update current state', () => {
-    const [getState, setState] = createState({ x: 0, y: 1 });
+    const [getState, setState] = state.create({ x: 0, y: 1 });
 
     setState({ x: 5 });
 
@@ -197,7 +197,7 @@ describe('setState', () => {
   // test 6 - check if `setState` call invokes the handler with the latest update
   test('should invoke handler with the latest update', () => {
     const handler = jest.fn();
-    const [getState, setState] = createState({ x: 0, y: 1 }, handler);
+    const [getState, setState] = state.create({ x: 0, y: 1 }, handler);
 
     setState({ x: 2 });
     setState({ x: 3 });
@@ -216,7 +216,7 @@ describe('setState', () => {
       value: jest.fn(),
     };
 
-    const [getState, setState] = createState({
+    const [getState, setState] = state.create({
       uuid: '%6^f',
       config: { theme: 'dark' },
       value: 11,

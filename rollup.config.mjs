@@ -37,6 +37,7 @@ export default [
     output: {
       file: 'lib/cjs/state-local.js',
       format: 'cjs',
+      exports: 'default',
     },
     plugins: commonPlugins,
   },
