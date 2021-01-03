@@ -1,5 +1,11 @@
 ### Versions
 
+## 1.0.6
+###### *Jan 3, 2021*
+
+- use default export in the entry file
+- fix library import in `spec.js`
+
 ## 1.0.5
 ###### *Jan 3, 2021*
 
