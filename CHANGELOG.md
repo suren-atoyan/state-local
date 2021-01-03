@@ -1,5 +1,11 @@
 ### Versions
 
+## 1.0.5
+###### *Jan 3, 2021*
+
+- replace `webpack` with `rollup`
+- add cjs/es bundles
+
 ## 1.0.4
 ###### *Nov 15, 2020*
 
