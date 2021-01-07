@@ -1,6 +1,6 @@
 {
   "name": "state-local",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Tiny, simple, and robust technique for defining and acting with local states",
   "main": "lib/cjs/state-local.js",
   "module": "lib/es/state-local.js",

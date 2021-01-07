@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.7
+###### *Jan 7, 2021*
+
+- package: add jsdelivr source path
+
 ## 1.0.6
 ###### *Jan 3, 2021*
 
